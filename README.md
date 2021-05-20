@@ -4,7 +4,7 @@ Este projeto é desenvolvido pelo Afonso Antunes e pela Carolina Rei para a Unid
 
 
 Medium Carolina Rei:  https://carolinaalexandrarei.medium.com/api-takeaway-2155ea9d25f0
-Medium Afonso Antunes:
+Medium Afonso Antunes: https://afonso-antunes.medium.com/api-take-away-2cbea4afce74
 
 
 
