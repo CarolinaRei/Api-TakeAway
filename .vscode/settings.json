@@ -1,0 +1,8 @@
+{
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/75d7e5af-462d-464d-a670-5c66409b2df1/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/takeawayAPI",
+    "appService.deploySubpath": "."
+}

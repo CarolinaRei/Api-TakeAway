@@ -1,0 +1,434 @@
+openapi: 3.0.0
+info:
+  title: Restaurante
+  description: API de restaurantes
+  contact:
+    email: carolinaalexandrerei@gmail.com
+  version: "1.0"
+servers:
+- url: https://takeawayapi.azurewebsites.net/
+paths:
+  /utilizadores/{IdUtilizador}:
+    get:
+      tags: []
+      summary: Obter Utilizador
+      description: Devolve uma informaçao utilizador que possui o ID fornecido.
+      operationId: getUtilizador
+      parameters:
+      - name: IdUtilizador
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Utilizador encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Utilizador'
+        "404":
+          description: Utilizador não encontrado
+      x-swagger-router-controller: Utilizador
+    delete:
+      summary: Apagar Utilizador
+      description: Apaga utilizador
+      operationId: deleteUtilizador
+      parameters:
+      - name: IdUtilizador
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "410":
+          description: Utilizador apagado
+      x-swagger-router-controller: Utilizador
+    put:
+      summary: Actualizar Utilizador
+      description: Actualiza a informação de um utilizador existente.
+      operationId: putUtilizador
+      parameters:
+      - name: IdUtilizador
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        description: Put user properties to update.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Utilizador'
+      responses:
+        "200":
+          description: Utilizador Actualizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Utilizador'
+        "404":
+          description: Utilizador nao encontrado
+        "409":
+          description: Email já existe
+      x-swagger-router-controller: Utilizador
+  /utilizador:
+    post:
+      summary: Criar Novo Utilizador
+      description: Cria um novo utilizador.
+      operationId: postUtilizador
+      requestBody:
+        description: Envia os dados necessarios para que a API consiga criar um novo
+          utilizador.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Utilizador'
+      responses:
+        "201":
+          description: Utilizador Criado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Utilizador'
+        "400":
+          description: Informação Insuficiente para criar utilizador
+        "409":
+          description: Email ja se encontra registado
+      x-swagger-router-controller: Utilizador
+  /restaurante:
+    post:
+      summary: Criar Novo Restaurante
+      description: Criação de restaurante
+      operationId: postRestaurante
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Restaurante'
+      responses:
+        "201":
+          description: Restaurante criado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Restaurante'
+        "400":
+          description: Informação Insuficiente para criar restaurante
+        "409":
+          description: Restaurante ja se encontra registado
+      x-swagger-router-controller: Restaurante
+  /restaurantes/{IdRestaurante}:
+    get:
+      summary: Apagar Restaurante
+      description: Encontra restaurante
+      operationId: getRestaurante
+      parameters:
+      - name: IdRestaurante
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Restaurante'
+        "400":
+          description: Informação Insuficiente
+      x-swagger-router-controller: Restaurante
+    delete:
+      summary: Apagar Restaurante
+      description: Apagar restaurante
+      operationId: deleteRestaurante
+      parameters:
+      - name: IdRestaurante
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "410":
+          description: Restaurante apagado
+      x-swagger-router-controller: Restaurante
+    put:
+      summary: Actualizar Restaurante
+      description: Actualiza Restaurante
+      operationId: putRestaurante
+      parameters:
+      - name: IdRestaurante
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Restaurante actualizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Restaurante'
+        "400":
+          description: Dados insuficientes para actualizar o restaurante
+        "409":
+          description: Restaurante já existe
+      x-swagger-router-controller: Restaurante
+  /prato:
+    post:
+      summary: Criar Prato
+      description: Cria Pratos
+      operationId: postPrato
+      responses:
+        "201":
+          description: Prato criado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Prato'
+        "400":
+          description: Dados insuficientes para criar o prato
+        "409":
+          description: Prato já existe
+      x-swagger-router-controller: Prato
+  /pratos/{Nome}:
+    get:
+      tags: []
+      summary: Obter Pratos
+      description: Obter pratos atraves do nome
+      operationId: getPrato
+      parameters:
+      - name: Nome
+        in: path
+        description: Nome do prato
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Prato Encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Prato'
+        "404":
+          description: Prato não encontrado
+      x-swagger-router-controller: Prato
+    delete:
+      summary: Apagar Prato
+      description: Apaga pratos atraves do nome
+      operationId: deletePrato
+      parameters:
+      - name: Nome
+        in: path
+        description: Nome do prato
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "410":
+          description: Prato apagado
+      x-swagger-router-controller: Prato
+    put:
+      summary: Actualizar Prato
+      description: Actualiza pratos
+      operationId: putPrato
+      parameters:
+      - name: Nome
+        in: path
+        description: Nome do prato
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Prato Actualizado
+        "400":
+          description: Dados insuficientes para criar prato
+      x-swagger-router-controller: Prato
+  /pedido:
+    post:
+      summary: Criar Pedido
+      description: Cria Pedido
+      operationId: postPedido
+      responses:
+        "201":
+          description: Pedido criado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pedido'
+        "400":
+          description: Dados insuficientes para criar pedido
+        "409":
+          description: Pedido ja existe
+      x-swagger-router-controller: Pedido
+  /pedidos/{IdPedido}:
+    get:
+      tags: []
+      summary: Obter Pedido
+      description: Pedido encontrado
+      operationId: getPedido
+      parameters:
+      - name: IdPedido
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Pedido encontrado
+        "400":
+          description: Pedido não encontrado
+      x-swagger-router-controller: Pedido
+    delete:
+      summary: Apagar Pedido
+      description: Apaga o pedido
+      operationId: deletePedido
+      parameters:
+      - name: IdPedido
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "410":
+          description: Pedido apagado
+      x-swagger-router-controller: Pedido
+    put:
+      summary: Actualizar Pedido
+      description: Actualiza o pedido
+      operationId: putPedido
+      parameters:
+      - name: IdPedido
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Pedido actualizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pedido'
+        "400":
+          description: Dados insuficientes para actualizar
+      x-swagger-router-controller: Pedido
+components:
+  schemas:
+    Utilizador:
+      title: Utilizador
+      description: Este e o modelo dos utilizadores
+      required:
+      - email
+      - emailVerificado
+      - primeiroNome
+      - ultimoNome
+      type: object
+      properties:
+        id:
+          type: string
+        primeiroNome:
+          type: string
+          example: Ana
+        ultimoNome:
+          type: string
+          example: Costa
+        email:
+          type: string
+          format: email
+          example: acosta@gmail.com
+        dataDeNascimento:
+          type: string
+          format: date
+        emailVerificado:
+          type: boolean
+          default: false
+        dataDeCriacao:
+          type: string
+          format: date
+    Restaurante:
+      title: Restaurante
+      type: object
+      properties:
+        id:
+          type: string
+          example: 81f17267-3c06-432e-8072-a294db1abf39
+        nome:
+          type: string
+          example: Dona Ana
+        localizacao:
+          type: string
+          example: Lisboa
+        pratos:
+          type: array
+          items:
+            $ref: '#/components/schemas/Prato'
+    Prato:
+      title: Prato
+      type: object
+      properties:
+        id:
+          type: string
+          example: 81f17267-3c06-432e-8072-a294db1abf36
+        nome:
+          type: string
+          uniqueItems: true
+          example: Caril
+        ingredientes:
+          type: string
+          example: Arroz de frango com caril
+        preco:
+          type: number
+          example: 10.4
+    Pedido:
+      title: Pedido
+      type: object
+      properties:
+        id:
+          type: string
+          example: 81f17267-3c06-432e-8072-a294db1abf36
+        pratos:
+          uniqueItems: false
+          type: array
+          items:
+            $ref: '#/components/schemas/Prato'
+        totalAPagar:
+          type: number
+          example: 20.8
+        dataEntrada:
+          type: string
+          format: date
+        dataSaida:
+          type: string
+          format: date
+        utlizador:
+          $ref: '#/components/schemas/Utilizador'
+        restaurante:
+          $ref: '#/components/schemas/Restaurante'
